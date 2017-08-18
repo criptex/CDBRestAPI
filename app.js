@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var MongoMarketDataProvider_1 = require("./databases/mongo/MongoMarketDataProvider");
+var Sqlite3MarketDataProvider_1 = require("./databases/sqlite3/Sqlite3MarketDataProvider");
+var MarketDataProviderProxy_1 = require("./services/MarketDataProviderProxy");
+var RequestBroker_1 = require("./services/RequestBroker");
+var CDBCalcService_1 = require("./services/CDBCalcService");
+var marketDataProviderProxy = new MarketDataProviderProxy_1.MarketDataProviderProxy(new MongoMarketDataProvider_1.MongoMarketDataProvider(), new Sqlite3MarketDataProvider_1.Sqlite3MarketDataProvider());
+var requestBroker = new RequestBroker_1.RequestBroker(new CDBCalcService_1.CDBCalcService(marketDataProviderProxy));
+requestBroker.start();

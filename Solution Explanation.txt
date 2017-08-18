@@ -1,0 +1,11 @@
+Dear Developers from GorilaInvest
+
+This API was created using NodeJS, TypeScript, Mongoose(API for MongoDB), Sqlite3, Express, Body-Parser, Visual Studio Code, Postman and SQLite Manager.
+
+	Everytime a user make a request it's identified by the RequestBroker, after the request reach its proper method the body data is collected and used for the creation of a CDB object, with this object the RequestBroker requests the UnitPrice from CDBCalcService, then the CDBCalcService requests from its MarkerDataProvider a array of CDI objects using the investmentDate and CurrentDate of the CDB object, with this lists the CDBCalcService can calculate the UnitPrice and send back to the RequestBroker and the RequestBroker send it as a json to the user.
+
+	IMarketDataProvider is an interface which is implemented by three classes, MongoDataProvider responsible to connect and to get the data from your database and Sqlite3MarketDataProvider responsible to  read and to get the data from the marketdb.sqlite file, which contains older CDI series collected from CETIP site, the oldest year is 1998, because this was the year when they start to use the exponential stardart of 1/252. The last class MarketDataProviderProxy is responsible for choosing Sqlite3 when Mongo does not have the data. (At first I tried to insert the data on MongoDB but I didn't had authorization to do so).
+	CDB class also has the responsability to calculate its daily value or as you called TCDI. By the way the formula to calculate it was missing a -1 at the end on your pdf, the correct on is (1+rate/100)^(1/252)-1.
+	I'm aware that I could improve some parts using dependency injection, exception treatment and log.
+	The other interfaces, classes and methods are used to better organize the code and help on the purposes I already described.
+	Reminder: To understand the code you need to at least know what is TypeScript and what it does, I recommend Visual Studio Code to open the project.

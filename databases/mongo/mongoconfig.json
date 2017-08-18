@@ -1,0 +1,7 @@
+{
+    "user":"gorila-test",
+    "password":"gorilarocks",
+    "url":"ds137261.mlab.com",
+    "port": 37261,
+    "database": "heroku_q9vz18pz"
+}
